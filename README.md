@@ -1,79 +1,107 @@
-# Work Record
+# 🧠 Work Record
 
-**An AI-powered career documentation system built on [Claude Code](https://claude.ai/code).**
+An AI-powered developer memory system for documenting, structuring, and reusing your past projects.
 
-You point it at your project repos. It reads the code, writes structured interview references,
-maps your experience to job descriptions, and generates a personal introduction — all as
-plain Markdown files you own and version-control.
+Built on Claude Code, it reads your repositories, extracts real implementation details, and turns them into structured interview references, resume content, and a cohesive personal narrative — all as Markdown files you own and version-control.
 
----
-
-## What Is This?
-
-Most engineers struggle to articulate their work in interviews. This system solves that by
-maintaining a living, structured record of every project you've shipped — extracted directly
-from your codebase, not written by hand.
-
-**Three types of documents, generated automatically:**
-
-| Document | What it contains | Lives in |
-|---|---|---|
-| `{category}_project_intro_{name}.md` | Cloud architecture, CI/CD, security, talking points | Inside each project repo |
-| `my-summary.md` | Hard skills, soft skills, spoken intro across all projects | This folder |
-| `resumes/resume-{role}-{date}.md` | JD mapping, narrative, tailored opening for one application | `resumes/` |
-
-**The key insight:** project intros are timeless facts about the system. JD mapping is
-application-specific. Keeping them separate means you never corrupt your source-of-truth
-when applying for a new role.
+> Stop guessing how to describe your work. Let your code speak for itself.
 
 ---
 
-## Prerequisites
+## ✨ What This Solves
 
-- **[Claude Code](https://claude.ai/code)** — the CLI or desktop app (required)
-- Git (to version-control your documentation)
+Most engineers don’t struggle with building —  
+they struggle with **explaining what they built**.
+
+- You forget implementation details over time  
+- You can’t clearly articulate system design in interviews  
+- Writing resumes becomes repetitive and inconsistent  
+
+This system fixes that by maintaining a **living, structured record of your work**, extracted directly from your codebase — not written from memory.
 
 ---
 
-## Quick Start
+## ⚙️ What It Generates
 
-**1. Create your own copy**
+Three types of documents, each with a clear responsibility:
 
-On GitHub, click **Use this template → Create a new repository**, then clone your copy:
+| Document | Purpose | Location |
+|--------|--------|--------|
+| `{category}_project_intro_{name}.md` | Architecture, CI/CD, security, talking points | Inside each project repo |
+| `my-summary.md` | Aggregated skills, experience, personal intro | This folder |
+| `resumes/resume-{role}-{date}.md` | Job-specific mapping, narrative, tailored intro | `resumes/` |
+
+---
+
+## 🧠 Core Design Principle
+
+Project documentation and job applications should **never be mixed**.
+
+- **Project intros** = timeless, factual system knowledge  
+- **Resumes** = context-specific storytelling for one role  
+
+This separation ensures your source of truth stays clean, reusable, and future-proof.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Create your own copy
+
+Click **Use this template** on GitHub, then:
+
 ```bash
 git clone https://github.com/{you}/work-record-tool.git
 cd work-record-tool
-```
+````
 
-**2. Set your path** (one-time setup)
+---
 
-Several skill files reference `{WORK_RECORD_PATH}` as a placeholder for this folder's absolute path.
-Run this to replace it everywhere:
+### 2. Set your path (one-time setup)
+
+Replace `{WORK_RECORD_PATH}` with your local path:
+
 ```bash
 WORK_RECORD_PATH=$(pwd) && grep -rl '{WORK_RECORD_PATH}' . --include="*.md" | xargs sed -i '' "s|{WORK_RECORD_PATH}|$WORK_RECORD_PATH|g"
 ```
 
-> On Linux, remove the `''` after `-i`: `xargs sed -i "s|..."`
+(Linux: remove `''` after `-i`)
 
-**3. Open Claude Code in this folder**
+---
+
+### 3. Open Claude Code
+
 ```bash
 claude .
 ```
 
-**4. Document your first project**
-```
+---
+
+### 4. Document your first project
+
+```bash
 /new-project-intro /absolute/path/to/your/repo
 ```
 
-Claude explores the repo, writes a project intro inside it, and registers it in `project-index.md`.
+Claude will:
 
-**5. Generate your personal summary**
-```
+* Explore the repo
+* Generate a structured project intro
+* Register it in `project-index.md`
+
+---
+
+### 5. Generate your personal summary
+
+```bash
 /update-summary
 ```
 
-**6. When applying for a job, create a resume file**
-```
+---
+
+### 6. Create a resume for a job
+
+```bash
 /new-resume Role: Backend Engineer. Company: ABC.
 JD:
 {paste the full job description here}
@@ -81,86 +109,100 @@ JD:
 
 ---
 
-## How It Works
+## 🔄 How It Works
 
 ```
 /new-project-intro {repo-path}
        │
        ▼
-{category}_project_intro_{name}.md     ← timeless per-project detail (lives in each repo)
-       │                                  cloud architecture · CI/CD · security · talking points
-       │                                  NO JD-specific content
+project_intro.md         ← timeless system knowledge (per project)
        │
-       ├──────────────────────────────▶ my-summary.md          (/update-summary)
-       │                                  hard skills · soft skills · spoken intro
+       ├──────────────▶ my-summary.md        (/update-summary)
+       │                     aggregated skills & narrative
        │
-       └──────────────────────────────▶ resumes/resume-{role}-{date}.md    (/new-resume)
-                                          JD mapping · narrative · tailored opening
-                                          one file per application, never overwritten
+       └──────────────▶ resume.md            (/new-resume)
+                             job-specific mapping & storytelling
 ```
 
-**Rule:** Never put JD-specific content in project intros. Create a new resume file instead.
-This keeps your project documentation clean and reusable across every future application.
+**Rule:**
+Never put JD-specific content into project intros.
+Always generate a new resume file instead.
 
 ---
 
-## Files in This Folder
+## 📂 Project Structure
 
-| File | Purpose |
-|---|---|
-| `README.md` | This file |
-| `CONVENTIONS.md` | Full rules and section templates — the system's source of truth |
-| `CLAUDE.md` | Auto-loaded by Claude Code when you open this folder — no manual setup needed |
-| `project-index.md` | Index of all your documented projects *(auto-updated by `/new-project-intro`)* |
-| `my-summary.md` | Your personal career summary *(gitignored — regenerate any time)* |
-| `resumes/` | One file per job application *(gitignored)* |
-| `.claude/skills/` | Slash command definitions |
+| File             | Purpose                             |
+| ---------------- | ----------------------------------- |
+| README.md        | This file                           |
+| CONVENTIONS.md   | System rules and templates          |
+| CLAUDE.md        | Auto-loaded context for Claude Code |
+| project-index.md | All tracked projects                |
+| my-summary.md    | Personal summary (gitignored)       |
+| resumes/         | One file per application            |
+| .claude/skills/  | Command definitions                 |
 
 ---
 
-## When to Use Each Command
+## 🎯 When to Use Each Command
 
-### After finishing a new project
-```
-/new-project-intro /absolute/path/to/your/repo
-```
-Claude explores the repo, generates a project intro inside it, and adds an entry to `project-index.md`.
-Then run `/update-summary` to refresh your personal summary.
+### After finishing a project
 
-### When applying for a new role
+```bash
+/new-project-intro /path/to/repo
 ```
-/new-resume Role: {role title}. Company: {company}.
+
+→ Generates project intro + updates index
+→ Then run `/update-summary`
+
+---
+
+### When applying for a job
+
+```bash
+/new-resume Role: {role}. Company: {company}.
 JD:
-{paste full JD here}
+{job description}
 ```
-Creates a new file in `resumes/`. Project intros are never touched.
 
-### When your skills or stack changed significantly
-```
+→ Creates a new resume file
+
+---
+
+### When your experience evolves
+
+```bash
 /update-summary
 ```
-Re-reads all project intros and overwrites `my-summary.md`.
 
-### After a major architecture change in a project
-
-Open Claude Code in the project repo and ask:
-```
-Re-explore this repo and update the existing project intro file following the
-conventions in {WORK_RECORD_PATH}/CONVENTIONS.md.
-Focus on what has changed — cloud architecture, CI/CD, security, or key patterns.
-```
+→ Rebuilds your personal narrative
+(Regenerate `my-summary.md` from all projects listed in `{WORK_RECORD_PATH}/project-index.md`, following the conventions in `{WORK_RECORD_PATH}/CONVENTIONS.md`.)
 
 ---
 
-## Customizing the System
+## 🛠 Customization
 
-All rules, section templates, and content guidelines live in `CONVENTIONS.md`. Edit it to:
-- Add your own project category prefixes
-- Change the sections generated in project intros
-- Adjust what counts as an "Impressive Outcome" in Key Numbers
+All generation rules live in `CONVENTIONS.md`.
+
+You can:
+
+* Change section structures
+* Redefine what counts as “impact”
 
 ---
 
-## License
+## 💡 Vision
 
-MIT — see `LICENSE`.
+This project explores a simple idea:
+
+> Your code already contains your experience.
+> You just need a system to extract and reuse it.
+
+Work Record turns your repositories into a **developer memory layer** —
+so you don’t just build projects, you **retain and leverage them**.
+
+---
+
+## 📄 License
+
+MIT — see LICENSE.
