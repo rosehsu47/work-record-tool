@@ -21,6 +21,18 @@ This system fixes that by maintaining a **living, structured record of your work
 
 ---
 
+## 💡 Vision
+
+This project explores a simple idea:
+
+> Your code already contains your experience.
+> You just need a system to extract and reuse it.
+
+Work Record turns your repositories into a **developer memory layer** —
+so you don’t just build projects, you **retain and leverage them**.
+
+---
+
 ## ⚙️ What It Generates
 
 Three types of documents, each with a clear responsibility:
@@ -191,15 +203,24 @@ You can:
 
 ---
 
-## 💡 Vision
+## 🤖 Using with Other AI Tools
 
-This project explores a simple idea:
+The generated `my-summary.md` is designed to be portable.
 
-> Your code already contains your experience.
-> You just need a system to extract and reuse it.
+You can directly copy its content into other AI tools (e.g. ChatGPT, Gemini) to:
+- Refine wording and tone  
+- Adapt content for different roles  
+- Improve storytelling and flow  
 
-Work Record turns your repositories into a **developer memory layer** —
-so you don’t just build projects, you **retain and leverage them**.
+This makes it easy to turn structured facts into polished narratives without rewriting everything from scratch.
+
+---
+
+## 📦 Version
+
+### v0.1.0 — Initial Release
+
+Focused on quickly extracting and structuring key technical details from your projects — making it easier to recall what you built and talk about it with clarity.
 
 ---
 
