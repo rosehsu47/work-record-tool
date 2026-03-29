@@ -1,0 +1,4 @@
+my-summary.md
+resumes/*.md
+!resumes/.gitkeep
+project-index.md
