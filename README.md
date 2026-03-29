@@ -216,14 +216,6 @@ This makes it easy to turn structured facts into polished narratives without rew
 
 ---
 
-## 📦 Version
-
-### v0.1.0 — Initial Release
-
-Focused on quickly extracting and structuring key technical details from your projects — making it easier to recall what you built and talk about it with clarity.
-
----
-
 ## 📄 License
 
 MIT — see LICENSE.
